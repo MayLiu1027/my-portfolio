@@ -1,0 +1,131 @@
+:root {
+  --paper: #f6f4f1;
+  --ink: #000000;
+  --border-line: #eeeeee;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.7;
+  font-weight: 400;
+}
+a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.container {
+  width: min(92%, 1100px);
+  margin: 0 auto;
+}
+
+/* 导航 */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--paper);
+  z-index: 999;
+  transition: 0.3s ease;
+}
+.navbar.scrolled {
+  padding: 1.2rem 4rem;
+  border-bottom: 1px solid var(--border-line);
+}
+.logo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.nav-menu {
+  display: flex;
+  gap: 2.6rem;
+  font-size: 0.98rem;
+}
+
+/* 封面Hero */
+.hero-cover {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 6rem;
+}
+.hero-top-info h1 {
+  font-size: clamp(4rem, 12vw, 9rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+  margin-bottom: 1rem;
+}
+.hero-top-info p {
+  font-size: 1.1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* 通用区块 */
+.section-wrap {
+  padding: 8rem 0;
+}
+.section-wrap h2 {
+  font-size: 2.4rem;
+  margin-bottom: 3rem;
+  font-weight: 700;
+}
+.index-list {
+  list-style: none;
+}
+.index-list li {
+  font-size: 1.4rem;
+  margin-bottom: 1.4rem;
+}
+.work-item {
+  margin-bottom: 5rem;
+}
+.work-item h3 {
+  font-size: 1.6rem;
+  margin-bottom: 0.8rem;
+}
+.work-item p {
+  max-width: 640px;
+  opacity: 0.82;
+}
+
+/* 滚动淡入动画 */
+.fade-in {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: all 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.fade-in.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 适配手机 */
+@media(max-width:768px){
+  .navbar{
+    padding:1.4rem 1.6rem;
+  }
+  .navbar.scrolled{
+    padding:1rem 1.6rem;
+  }
+  .nav-menu{
+    gap:1.2rem;
+    font-size:0.88rem;
+  }
+  .section-wrap{
+    padding:5rem 0;
+  }
+}
