@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>PORTFOLIO · 视觉作品集</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 全局导航 -->
+  <nav class="navbar">
+    <div class="logo" data-view="home">PORTFOLIO</div>
+    <div class="nav-menu">
+      <a href="#" data-view="home" class="active">首页</a>
+      <a href="#" data-view="works">作品</a>
+      <a href="#" data-view="about">关于我</a>
+    </div>
+  </nav>
+
+  <!-- 视图 1：首页 -->
+  <main class="view" id="view-home">
+    <section class="hero-section">
+      <p class="hero-eyebrow">VISUAL PORTFOLIO · 2025</p>
+      <h1>PORT<br>FOLIO</h1>
+      <p class="hero-sub">平面 / 文创 / IP / UI / 摄影 / 建模 &amp; AIGC</p>
+      <div class="scroll-hint">
+        <span>向下滚动探索</span>
+        <div class="mouse"></div>
+      </div>
+    </section>
+
+    <!-- 首页第二屏：简短个人介绍 -->
+    <section class="intro-section">
+      <div class="intro-card">
+        <div class="intro-avatar">头像占位</div>
+        <div class="intro-info">
+          <p class="intro-eyebrow">ABOUT · 简短介绍</p>
+          <h3 class="intro-title">你好，我是 [您的名字]</h3>
+          <ul class="intro-list">
+            <li><span>专业</span><strong>视觉传达 / 交互设计</strong></li>
+            <li><span>简介</span><strong>专注于跨媒介视觉设计，从平面、IP 到界面与动态影像。</strong></li>
+            <li><span>常用工具</span><strong>PS / AI / C4D / Figma</strong></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3D 环绕展示区 -->
+    <section class="showcase-section">
+      <h2 class="section-title">EXPLORE CATEGORIES</h2>
+      
+      <div class="ring-stage">
+        <!-- 箭头按钮放最外层，不拦截中间卡片的点击 -->
+        <button class="nav-arrow left-arrow" id="btnPrev">‹</button>
+        <button class="nav-arrow right-arrow" id="btnNext">›</button>
+        
+        <div class="ring-wrapper">
+          <div class="ring-3d" id="ring3d"></div>
+        </div>
+      </div>
+      <p class="ring-tip">鼠标悬停两侧箭头切换 · 点击正中心卡片进入作品详情</p>
+    </section>
+  </main>
+
+  <!-- 视图 2：作品总览（列表流） -->
+  <main class="view" id="view-works" hidden>
+    <section class="works-wrap">
+      <header class="works-header">
+        <h2>作品索引</h2>
+        <span class="works-sub">ALL WORKS · INDEX</span>
+      </header>
+      <div class="works-list" id="worksList"></div>
+    </section>
+  </main>
+
+  <!-- 视图 3：分类详情（横向层叠卡片 + 作品详情） -->
+  <main class="view" id="view-category" hidden>
+    <button class="back-btn" id="backHome">← 返回首页</button>
+
+    <div class="category-layout">
+      <!-- 左侧：Coverflow 层叠卡片 -->
+      <section class="stack-panel">
+        <header class="stack-head">
+          <span class="stack-label">COLLECTION</span>
+          <span class="stack-count" id="stackCount">01 / 04</span>
+        </header>
+
+        <div class="stack-stage">
+          <div class="card-stack" id="galleryStack"></div>
+        </div>
+
+        <footer class="stack-controls">
+          <button class="stack-arrow" id="stackPrev" aria-label="上一件作品">‹</button>
+          <div class="stack-dots" id="stackDots"></div>
+          <button class="stack-arrow" id="stackNext" aria-label="下一件作品">›</button>
+        </footer>
+      </section>
+
+      <!-- 右侧：作品详细信息 -->
+      <section class="detail-panel" id="detailPanel">
+        <div class="status-row">
+          <span class="live-dot"></span>
+          <span class="live-text">Live Now</span>
+          <span class="status-sep">/</span>
+          <span class="status-sub">PROJECT DETAILS</span>
+        </div>
+
+        <p class="detail-eyebrow" id="detailCat">分类</p>
+        <h2 class="detail-title" id="detailTitle">作品标题</h2>
+        <p class="detail-desc" id="detailDesc">作品详细描述在这里...</p>
+
+        <div class="detail-tags" id="detailTags"></div>
+
+        <div class="creator-box">
+          <div class="creator-avatar"></div>
+          <div class="creator-meta">
+            <p class="creator-name">[您的名字]</p>
+            <p class="creator-role">Creator / Designer</p>
+          </div>
+        </div>
+
+        <div class="detail-actions">
+          <button class="btn-primary" id="btnViewLarge">查看大图</button>
+          <button class="btn-ghost" id="btnDetailInfo">作品详情</button>
+        </div>
+
+        <div class="detail-extra" id="detailExtra">
+          <div class="extra-item"><span>创作年份</span><strong>2025</strong></div>
+          <div class="extra-item"><span>媒介</span><strong>数字 / 印刷</strong></div>
+          <div class="extra-item"><span>状态</span><strong>已发布</strong></div>
+        </div>
+
+        <div class="detail-meta">
+          <div class="meta-item"><span>作品序号</span><strong id="detailCounter">01 / 04</strong></div>
+          <div class="meta-item"><span>所属分类</span><strong id="detailCatMeta">分类</strong></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- 大图预览：整张大图 + 详细介绍 -->
+    <div class="lightbox" id="lightbox" hidden>
+      <button class="lightbox-close" id="lightboxClose" aria-label="关闭">✕</button>
+      <div class="lightbox-inner">
+        <div class="lightbox-media">
+          <span id="lightboxImgText">大图占位</span>
+        </div>
+        <div class="lightbox-info">
+          <div class="status-row">
+            <span class="live-dot"></span>
+            <span class="live-text">Live Now</span>
+          </div>
+          <p class="detail-eyebrow" id="lightboxCat">分类</p>
+          <h3 class="lightbox-title" id="lightboxTitle">作品标题</h3>
+          <p class="detail-desc" id="lightboxDesc">作品详细描述在这里...</p>
+          <div class="detail-tags" id="lightboxTags"></div>
+          <p class="lightbox-note">点击遮罩或右上角 ✕ 关闭预览</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 视图 4：关于我 -->
+  <main class="view" id="view-about" hidden>
+    <div class="about-wrap">
+      <div class="about-header">
+        <h2>关于我</h2>
+        <span class="about-sub">ABOUT ME</span>
+      </div>
+      <div class="about-content">
+        <div class="about-avatar">
+          <div class="avatar-placeholder">头像占位</div>
+        </div>
+        <div class="about-text">
+          <h3>你好，我是 [您的名字]。</h3>
+          <p>这里放您的自我介绍。比如：我是一名跨媒介视觉设计师，专注于品牌视觉、文创、IP 与界面设计。热爱用图形和影像记录生活……</p>
+          <p>您可以写下您的教育背景、工作经历、合作过的品牌，或者您对设计的理解。保持文字干净克制，留出呼吸感。</p>
+          <div class="about-contact">
+            <p><strong>联系我：</strong> hello@portfolio.studio</p>
+            <p><strong>常驻：</strong> 上海 / 自由职业</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="sketch.js"></script>
+</body>
+</html>
